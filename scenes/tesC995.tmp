@@ -17,7 +17,6 @@ gradient = SubResource("Gradient_w5hkb")
 position = Vector2(393, 238)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
-z_index = -1
 position = Vector2(551, 561)
 scale = Vector2(43.4772, 5.92904)
 

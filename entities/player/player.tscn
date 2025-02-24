@@ -1,13 +1,13 @@
-[gd_scene load_steps=4 format=3 uid="uid://ch0aoqyxxx1wa"]
+[gd_scene load_steps=5 format=3 uid="uid://ch0aoqyxxx1wa"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_ei5md"]
 [ext_resource type="Texture2D" uid="uid://c212ehr2aijsh" path="res://icon.svg" id="2_4jgke"]
+[ext_resource type="PackedScene" uid="uid://bd46a2jseco46" path="res://entities/player/arm/arm.tscn" id="3_agi6o"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_k8rk1"]
 size = Vector2(127, 127)
 
 [node name="player" type="CharacterBody2D"]
-position = Vector2(567, 328)
 script = ExtResource("1_ei5md")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -15,3 +15,10 @@ shape = SubResource("RectangleShape2D_k8rk1")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture = ExtResource("2_4jgke")
+
+[node name="arm1" parent="." instance=ExtResource("3_agi6o")]
+position = Vector2(128, 0)
+
+[node name="arm2" parent="." instance=ExtResource("3_agi6o")]
+position = Vector2(-128, 0)
+rotation = 3.14159
