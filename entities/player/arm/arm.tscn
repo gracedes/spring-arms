@@ -1,7 +1,6 @@
-[gd_scene load_steps=6 format=3 uid="uid://bd46a2jseco46"]
+[gd_scene load_steps=5 format=3 uid="uid://bd46a2jseco46"]
 
 [ext_resource type="Script" path="res://entities/player/arm/arm.gd" id="1_8su5x"]
-[ext_resource type="Script" path="res://entities/player/arm/hand.gd" id="2_xiiwu"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vf6xp"]
 radius = 32.249
@@ -23,7 +22,6 @@ node_a = NodePath("../hand")
 [node name="hand" type="RigidBody2D" parent="."]
 disable_mode = 1
 mass = 0.015
-script = ExtResource("2_xiiwu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="hand"]
 shape = SubResource("CircleShape2D_vf6xp")
