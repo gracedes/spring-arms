@@ -6,6 +6,7 @@ const JUMP_VELOCITY = -1000.0
 var arms = []
 @export var max_dist = 10
 @export var spring_coeff = 5
+@export var movement_coeff = 5
 
 func _ready() -> void:
 	arms = get_tree().get_nodes_in_group('arms')
@@ -29,6 +30,7 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()"""
 	check_inputs()
+	# apply_force(movement_keys())
 	apply_force(sum_arm_forces())
 
 func check_inputs() -> void:
@@ -41,9 +43,15 @@ func check_inputs() -> void:
 				arm.get_node('hand').visible = false
 		else:
 			if Input.is_action_just_pressed(arm.key):
-				arm.gpos = get_viewport().get_mouse_position()
+				arm.gpos = shorten(get_viewport().get_mouse_position())
 				arm.grab = true
 				arm.get_node('hand').visible = true
+
+func movement_keys() -> Vector2:
+	var dir = Vector2.ZERO
+	var hdir := Input.get_axis('ui_left', 'ui_right')
+	dir.x = hdir * movement_coeff
+	return dir
 
 func sum_arm_forces() -> Vector2:
 	var f = Vector2.ZERO
@@ -58,3 +66,6 @@ func sum_arm_forces() -> Vector2:
 			f += spring_coeff*(agpos-sgpos)
 	print(f)
 	return f
+
+func shorten(mpos: Vector2) -> Vector2:
+	

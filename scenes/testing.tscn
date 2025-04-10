@@ -14,6 +14,9 @@ gradient = SubResource("Gradient_w5hkb")
 [node name="Node2D" type="Node2D"]
 
 [node name="rplayer" parent="." instance=ExtResource("1_evbdv")]
+max_dist = null
+spring_coeff = null
+movement_coeff = null
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = -1
