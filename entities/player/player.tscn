@@ -18,7 +18,9 @@ texture = ExtResource("2_4jgke")
 
 [node name="arm1" parent="." instance=ExtResource("3_agi6o")]
 position = Vector2(128, 0)
+key = "leftClick"
 
 [node name="arm2" parent="." instance=ExtResource("3_agi6o")]
 position = Vector2(-128, 0)
 rotation = 3.14159
+key = "rightClick"
