@@ -2,7 +2,7 @@ extends Node2D
 
 var grab = false
 var gpos = Vector2()
-const max_leng = 10
+const max_leng = 300
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -34,4 +34,5 @@ func get_mpos(mpos: Vector2) -> Vector2:
 		var theta = atan(Y/X)
 		x = max_leng*cos(theta)
 		y = max_leng*sin(theta)
+	print_debug('player: ' + player.position + 'mouse: ' + mpos)
 	return Vector2(player.position.x + x, player.position.y + y)
