@@ -2,7 +2,7 @@ extends Node2D
 
 var grab = false
 var gpos = Vector2()
-const max_leng = 300
+const max_leng = 300.0
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -17,13 +17,13 @@ func _process(delta: float) -> void:
 			grab = false
 	else:
 		if Input.is_action_just_pressed('leftClick'):
-			gpos = get_mpos(get_viewport().get_mouse_position())
 			grab = true
+			gpos = get_mpos(get_viewport().get_mouse_position())
 
 func get_mpos(mpos: Vector2) -> Vector2:
 	var player = self.get_node('..')
-	var X = mpos.x - position.x
-	var Y = mpos.x - position.y
+	var X = mpos.x - player.position.x
+	var Y = mpos.x - player.position.y
 	var x
 	var y
 	
@@ -31,8 +31,8 @@ func get_mpos(mpos: Vector2) -> Vector2:
 		x = X
 		y = Y
 	else:
-		var theta = atan(Y/X)
-		x = max_leng*cos(theta)
+		var theta = abs(atan(Y/X))
+		x = max_leng*cos(theta) * (X/abs(X))
 		y = max_leng*sin(theta)
-	print_debug('player: ' + player.position + 'mouse: ' + mpos)
+	print_debug(player.position)
 	return Vector2(player.position.x + x, player.position.y + y)
