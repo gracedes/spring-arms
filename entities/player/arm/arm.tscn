@@ -1,9 +1,6 @@
-[gd_scene load_steps=5 format=3 uid="uid://bd46a2jseco46"]
+[gd_scene load_steps=4 format=3 uid="uid://bd46a2jseco46"]
 
 [ext_resource type="Script" path="res://entities/player/arm/arm.gd" id="1_8su5x"]
-
-[sub_resource type="CircleShape2D" id="CircleShape2D_vf6xp"]
-radius = 32.249
 
 [sub_resource type="Gradient" id="Gradient_d1eaa"]
 offsets = PackedFloat32Array(1)
@@ -12,19 +9,8 @@ colors = PackedColorArray(0.278431, 0.54902, 0.74902, 1)
 [sub_resource type="GradientTexture2D" id="GradientTexture2D_yybxv"]
 gradient = SubResource("Gradient_d1eaa")
 
-[node name="arm" type="Node2D"]
+[node name="arm" type="Node2D" groups=["arms"]]
 script = ExtResource("1_8su5x")
 
-[node name="spring" type="DampedSpringJoint2D" parent="."]
-rotation = 1.5708
-node_a = NodePath("../hand")
-
-[node name="hand" type="RigidBody2D" parent="."]
-disable_mode = 1
-mass = 0.015
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="hand"]
-shape = SubResource("CircleShape2D_vf6xp")
-
-[node name="Sprite2D" type="Sprite2D" parent="hand"]
+[node name="hand" type="Sprite2D" parent="."]
 texture = SubResource("GradientTexture2D_yybxv")
