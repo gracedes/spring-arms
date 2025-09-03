@@ -4,7 +4,7 @@ extends RigidBody2D
 const SPEED = 300.0
 const JUMP_VELOCITY = -1000.0
 var arms = []
-@export var max_dist = 10
+@export var max_dist = 300.0
 @export var spring_coeff = 5
 @export var movement_coeff = 5
 
@@ -64,8 +64,14 @@ func sum_arm_forces() -> Vector2:
 			var angle = sgpos.angle_to_point(agpos)
 			
 			f += spring_coeff*(agpos-sgpos)
-	print(f)
 	return f
 
 func shorten(mpos: Vector2) -> Vector2:
+	var relpos = mpos - position
 	
+	print(relpos)
+	
+	if relpos.length() > max_dist:
+		return (max_dist * relpos.normalized()) + position
+	else:
+		return relpos + position
