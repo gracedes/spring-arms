@@ -68,9 +68,6 @@ func sum_arm_forces() -> Vector2:
 
 func shorten(mpos: Vector2) -> Vector2:
 	var relpos = mpos - position
-	
-	print(relpos)
-	
 	if relpos.length() > max_dist:
 		return (max_dist * relpos.normalized()) + position
 	else:
