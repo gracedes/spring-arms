@@ -2,11 +2,14 @@ extends RigidBody2D
 
 
 const SPEED = 300.0
-const JUMP_VELOCITY = -1000.0
 var arms = []
-@export var max_dist = 300.0
+@export var max_dist = 600.0
 @export var spring_coeff = 5
 @export var movement_coeff = 5
+
+const jumpkey = 'jump'
+@export var jumpforce = -1000.0	# lol
+@export var downforce = 1000.0
 
 func _ready() -> void:
 	arms = get_tree().get_nodes_in_group('arms')
@@ -31,7 +34,7 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()"""
 	check_inputs()
 	# apply_force(movement_keys())
-	apply_force(sum_arm_forces())
+	apply_force(sum_arm_forces() + other_forces())
 
 func check_inputs() -> void:
 	for arm in arms:
@@ -64,6 +67,15 @@ func sum_arm_forces() -> Vector2:
 			var angle = sgpos.angle_to_point(agpos)
 			
 			f += spring_coeff*(agpos-sgpos)
+	return f
+
+func other_forces() -> Vector2:
+	var f = Vector2.ZERO
+	if Input.is_action_pressed(jumpkey):
+		"""if is_on_floor():
+			f.y = jumpforce
+		else:"""
+		f.y = downforce
 	return f
 
 func shorten(mpos: Vector2) -> Vector2:
