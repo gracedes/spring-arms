@@ -24,6 +24,7 @@ func _physics_process(delta: float) -> void:
 	if needstorque:
 		apply_torque(linear_velocity.x * torque_coeff)
 		needstorque = false
+	""" note: look into bug where spamming jump causes you to lose ability to jump """
 
 func check_inputs() -> void:
 	for arm in arms:
