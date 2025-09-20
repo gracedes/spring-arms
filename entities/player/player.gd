@@ -8,34 +8,22 @@ var arms = []
 @export var movement_coeff = 5
 
 const jumpkey = 'jump'
-@export var jumpforce = -7500.0	# lol
+@export var jumpforce = -30000.0	# lol
 @export var downforce = 1000.0
 @export var canjump = false
+var needstorque = false
+@export var torque_coeff = 200.0
 
 func _ready() -> void:
 	arms = get_tree().get_nodes_in_group('arms')
 
 func _physics_process(delta: float) -> void:
-	"""# Add the gravity.
-	if not is_on_floor():
-		velocity += get_gravity() * delta
-
-	# Handle jump.
-	if Input.is_action_just_pressed("ui_accept") and is_on_floor():
-		velocity.y = JUMP_VELOCITY
-
-	# Get the input direction and handle the movement/deceleration.
-	# As good practice, you should replace UI actions with custom gameplay actions.
-	var direction := Input.get_axis("ui_left", "ui_right")
-	if direction:
-		velocity.x = direction * SPEED
-	else:
-		velocity.x = move_toward(velocity.x, 0, SPEED)
-
-	move_and_slide()"""
 	check_inputs()
 	# apply_force(movement_keys())
 	apply_force(sum_arm_forces() + other_forces())
+	if needstorque:
+		apply_torque(linear_velocity.x * torque_coeff)
+		needstorque = false
 
 func check_inputs() -> void:
 	for arm in arms:
@@ -75,6 +63,8 @@ func other_forces() -> Vector2:
 	if Input.is_action_pressed(jumpkey):
 		if canjump:
 			f.y = jumpforce
+			needstorque = true
+			canjump = false
 		else:
 			f.y = downforce
 	return f
@@ -89,9 +79,7 @@ func shorten(mpos: Vector2) -> Vector2:
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	canjump = true
-	print("body entered!")
 
 
 func _on_area_2d_body_exited(body: Node2D) -> void:
 	canjump = false
-	print("body exited!")

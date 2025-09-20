@@ -17,11 +17,12 @@ size = Vector2(20, 3.20457)
 [node name="Node2D" type="Node2D"]
 
 [node name="rplayer" parent="." instance=ExtResource("1_evbdv")]
+position = Vector2(365, 190)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = -1
-position = Vector2(483, 467)
-scale = Vector2(43.4772, 5.92904)
+position = Vector2(2091, 1414)
+scale = Vector2(198.277, 5.92904)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 scale = Vector2(1.04, 1)
