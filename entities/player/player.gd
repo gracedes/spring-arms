@@ -8,8 +8,9 @@ var arms = []
 @export var movement_coeff = 5
 
 const jumpkey = 'jump'
-@export var jumpforce = -1000.0	# lol
+@export var jumpforce = -7500.0	# lol
 @export var downforce = 1000.0
+@export var canjump = false
 
 func _ready() -> void:
 	arms = get_tree().get_nodes_in_group('arms')
@@ -72,10 +73,10 @@ func sum_arm_forces() -> Vector2:
 func other_forces() -> Vector2:
 	var f = Vector2.ZERO
 	if Input.is_action_pressed(jumpkey):
-		"""if is_on_floor():
+		if canjump:
 			f.y = jumpforce
-		else:"""
-		f.y = downforce
+		else:
+			f.y = downforce
 	return f
 
 func shorten(mpos: Vector2) -> Vector2:
@@ -84,3 +85,13 @@ func shorten(mpos: Vector2) -> Vector2:
 		return (max_dist * relpos.normalized()) + position
 	else:
 		return relpos + position
+
+
+func _on_area_2d_body_entered(body: Node2D) -> void:
+	canjump = true
+	print("body entered!")
+
+
+func _on_area_2d_body_exited(body: Node2D) -> void:
+	canjump = false
+	print("body exited!")
