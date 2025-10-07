@@ -1,7 +1,8 @@
-[gd_scene load_steps=6 format=3 uid="uid://54hsdmyu62vd"]
+[gd_scene load_steps=8 format=3 uid="uid://54hsdmyu62vd"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_7j6a2"]
 [ext_resource type="Texture2D" uid="uid://c212ehr2aijsh" path="res://icon.svg" id="2_c88su"]
+[ext_resource type="Script" path="res://entities/player/hair/hair.gd" id="3_i4jb3"]
 [ext_resource type="PackedScene" uid="uid://bd46a2jseco46" path="res://entities/player/arm/arm.tscn" id="3_qugsh"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tdecw"]
@@ -10,8 +11,10 @@ friction = 0.0
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3gwhv"]
 size = Vector2(127, 127)
 
+[sub_resource type="PlaceholderTexture2D" id="PlaceholderTexture2D_vthr3"]
+size = Vector2(110, 100)
+
 [node name="RigidBody2D" type="RigidBody2D"]
-position = Vector2(393, 238)
 physics_material_override = SubResource("PhysicsMaterial_tdecw")
 script = ExtResource("1_7j6a2")
 
@@ -19,7 +22,14 @@ script = ExtResource("1_7j6a2")
 shape = SubResource("RectangleShape2D_3gwhv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 1
 texture = ExtResource("2_c88su")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+z_index = -1
+texture = SubResource("PlaceholderTexture2D_vthr3")
+offset = Vector2(0, -54)
+script = ExtResource("3_i4jb3")
 
 [node name="arm1" parent="." instance=ExtResource("3_qugsh")]
 position = Vector2(128, 0)
