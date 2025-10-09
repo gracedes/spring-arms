@@ -18,5 +18,5 @@ func move_to(yvelo: float, rot: float) -> void:
 		offset.y = move_toward(offset.y, -54.0, 500 * shift_coeff)
 	else:
 		print(yvelo * shift_coeff)
-		offset.y = move_toward(offset.y, -54.0 + (max_shift * -(yvelo / abs(yvelo)) * ((2 * (abs(rot) <= 90)) - 1)), min(abs(yvelo) * shift_coeff, 500 * shift_coeff))
+		offset.y = move_toward(offset.y, -54.0 + (max_shift * -(yvelo / abs(yvelo)) * (cos(deg_to_rad(abs(rot))))), min(abs(yvelo) * shift_coeff, 500 * shift_coeff))
 	pass
