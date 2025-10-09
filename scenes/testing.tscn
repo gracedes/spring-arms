@@ -17,7 +17,7 @@ size = Vector2(20, 3.20457)
 [node name="Node2D" type="Node2D"]
 
 [node name="rplayer" parent="." instance=ExtResource("1_evbdv")]
-position = Vector2(916, 1266)
+position = Vector2(886, 1266)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = -1
