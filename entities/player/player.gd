@@ -14,16 +14,32 @@ const jumpkey = 'jump'
 var needstorque = false
 @export var torque_coeff = 200.0
 
+var start_seq = true
+var start_init = false
+var start_timer = 0.0
+@export var start_force = 40000
+
 func _ready() -> void:
 	arms = get_tree().get_nodes_in_group('arms')
 
 func _physics_process(delta: float) -> void:
-	check_inputs()
-	# apply_force(movement_keys())
-	apply_force(sum_arm_forces() + other_forces())
-	if needstorque:
-		apply_torque(linear_velocity.x * torque_coeff)
-		needstorque = false
+	if start_seq:
+		if not start_init:
+			if Input.is_action_just_pressed(jumpkey): start_init = true
+		elif start_timer <= 3 and Input.is_action_pressed(jumpkey):
+			start_timer += delta
+		else:
+			var f = Vector2.ZERO
+			f.x += start_timer * start_force
+			start_seq = false
+			apply_force(f)
+	else:
+		check_inputs()
+		# apply_force(movement_keys())
+		apply_force(sum_arm_forces() + other_forces())
+		if needstorque:
+			apply_torque(linear_velocity.x * torque_coeff)
+			needstorque = false
 	""" note: look into bug where spamming jump causes you to lose ability to jump """
 
 func check_inputs() -> void:
