@@ -11,12 +11,12 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	var player = get_parent().get_parent()
-	move_to(player.linear_velocity.y)
+	move_to(player.linear_velocity.y, player.rotation)
 
-func move_to(yvelo: float) -> void:
+func move_to(yvelo: float, rot: float) -> void:
 	if abs(yvelo) <= 0.5:
 		offset.y = move_toward(offset.y, -54.0, 500 * shift_coeff)
 	else:
 		print(yvelo * shift_coeff)
-		offset.y = move_toward(offset.y, -54.0 + (max_shift * -(yvelo / abs(yvelo))), min(abs(yvelo) * shift_coeff, 500 * shift_coeff))
+		offset.y = move_toward(offset.y, -54.0 + (max_shift * -(yvelo / abs(yvelo)) * ((2 * (abs(rot) <= 90)) - 1)), min(abs(yvelo) * shift_coeff, 500 * shift_coeff))
 	pass
