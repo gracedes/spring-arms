@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://du6gqm0fbqnw2"]
+[gd_scene load_steps=8 format=3 uid="uid://du6gqm0fbqnw2"]
 
 [ext_resource type="PackedScene" uid="uid://54hsdmyu62vd" path="res://entities/player/rplayer.tscn" id="1_evbdv"]
 
@@ -14,14 +14,23 @@ gradient = SubResource("Gradient_w5hkb")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_nk80n"]
 size = Vector2(20, 3.20457)
 
+[sub_resource type="Gradient" id="Gradient_iurq5"]
+colors = PackedColorArray(0.0705882, 0.784314, 0.619608, 1, 0.0352941, 0.670588, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_y0nae"]
+gradient = SubResource("Gradient_iurq5")
+width = 1324
+height = 629
+fill_from = Vector2(0.243119, 0.795872)
+
 [node name="Node2D" type="Node2D"]
 
 [node name="rplayer" parent="." instance=ExtResource("1_evbdv")]
-position = Vector2(886, 1266)
+position = Vector2(2608, 741)
 
 [node name="StaticBody2D" type="StaticBody2D" parent="."]
 z_index = -1
-position = Vector2(2091, 1414)
+position = Vector2(2091, 2883)
 scale = Vector2(6000, 6.555)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
@@ -38,6 +47,18 @@ texture = SubResource("GradientTexture2D_gfnx6")
 position = Vector2(0, -9.52937)
 scale = Vector2(1.04, 1)
 shape = SubResource("RectangleShape2D_nk80n")
+
+[node name="ParallaxBackground" type="ParallaxBackground" parent="."]
+
+[node name="ParallaxLayer" type="ParallaxLayer" parent="ParallaxBackground"]
+
+[node name="TextureRect" type="TextureRect" parent="ParallaxBackground/ParallaxLayer"]
+offset_left = -2500.0
+offset_top = -2500.0
+offset_right = 497500.0
+offset_bottom = 497500.0
+texture = SubResource("GradientTexture2D_y0nae")
+stretch_mode = 1
 
 [connection signal="body_entered" from="StaticBody2D/Area2D" to="rplayer" method="_on_area_2d_body_entered"]
 [connection signal="body_exited" from="StaticBody2D/Area2D" to="rplayer" method="_on_area_2d_body_exited"]

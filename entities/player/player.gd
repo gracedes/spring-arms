@@ -8,9 +8,10 @@ var arms = []
 @export var movement_coeff = 5
 
 const jumpkey = 'jump'
-@export var jumpforce = -30000.0	# lol
+@export var jumpforce = -50000.0	# lol
 @export var downforce = 1000.0
 @export var canjump = false
+var just_jumped = false
 var needstorque = false
 @export var torque_coeff = 200.0
 
@@ -54,7 +55,7 @@ func check_inputs() -> void:
 				arm.get_node('hand').visible = false
 		else:
 			if Input.is_action_just_pressed(arm.key):
-				arm.gpos = shorten(get_viewport().get_mouse_position())
+				arm.gpos = shorten(get_global_mouse_position())
 				arm.grab = true
 				arm.get_node('hand').visible = true
 
@@ -79,13 +80,17 @@ func sum_arm_forces() -> Vector2:
 
 func other_forces() -> Vector2:
 	var f = Vector2.ZERO
-	if Input.is_action_pressed(jumpkey):
+	if Input.is_action_just_pressed(jumpkey):
 		if canjump:
 			f.y = jumpforce
+			just_jumped = true
 			needstorque = true
-			canjump = false
-		else:
-			f.y = downforce
+			#canjump = false
+	elif just_jumped and Input.is_action_just_released(jumpkey):
+		just_jumped = false
+	elif !canjump and !just_jumped and Input.is_action_pressed(jumpkey):
+		f.y = downforce
+	""" check how to better prevent holding after jump from effecting"""
 	return f
 
 func shorten(mpos: Vector2) -> Vector2:
