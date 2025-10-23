@@ -1,9 +1,10 @@
-[gd_scene load_steps=8 format=3 uid="uid://54hsdmyu62vd"]
+[gd_scene load_steps=9 format=3 uid="uid://54hsdmyu62vd"]
 
 [ext_resource type="Script" path="res://entities/player/player.gd" id="1_7j6a2"]
 [ext_resource type="Texture2D" uid="uid://c212ehr2aijsh" path="res://icon.svg" id="2_c88su"]
 [ext_resource type="Script" path="res://entities/player/hair/hair.gd" id="3_i4jb3"]
 [ext_resource type="PackedScene" uid="uid://bd46a2jseco46" path="res://entities/player/arm/arm.tscn" id="3_qugsh"]
+[ext_resource type="PackedScene" uid="uid://pd1d6ojrwy2a" path="res://utils/camera/camera.tscn" id="5_6ysmo"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_tdecw"]
 friction = 0.0
@@ -39,3 +40,6 @@ key = "leftClick"
 position = Vector2(-128, 0)
 rotation = 3.14159
 key = "rightClick"
+
+[node name="Camera" parent="." instance=ExtResource("5_6ysmo")]
+zoom = Vector2(0.5, 0.5)
