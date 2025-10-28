@@ -15,26 +15,28 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	var player = get_parent()
 	var v = player.linear_velocity
-	shift_pos(v)
-	zoom_out(v)
+	offset = shift_pos(v) 
+	zoom = zoom_out(v)
 
 func shift_pos(v: Vector2) -> Vector2:
 	var vp = get_viewport_rect().size * zoom
 	
-	var temp = 0.0001 * v
+	var temp = 0.001 * v
 	for i in range(2):
 		if temp[i] > -1.0:
 			v[i] = min(temp[i], 1.0)
 		else:
 			v[i] = -1.0
 	
-	return Vector2.ZERO
+	var r = Vector2.ZERO
+	for i in range(2):
+		r[i] = (1.0 / 3.0) * vp[i] * float(v[i])
+	
+	return Vector2(move_toward(offset.x, r.x, 5), move_toward(offset.y, r.y, 0.5))
 
-func zoom_out(v: Vector2) -> void:
+func zoom_out(v: Vector2) -> Vector2:
 	var x = 0.0001 * v.length()
-	#print(x, zoom.x)
 	if x > 0.25:
 		x = 0.25
 	var y = move_toward(zoom.x, min(base_zoom, base_zoom - x), 0.001)
-	zoom = Vector2(y, y)
-	pass
+	return Vector2(y, y)

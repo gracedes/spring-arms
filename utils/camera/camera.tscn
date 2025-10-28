@@ -4,5 +4,4 @@
 
 [node name="Camera" type="Camera2D"]
 zoom = Vector2(0.75, 0.75)
-editor_draw_drag_margin = true
 script = ExtResource("1_6pe0i")

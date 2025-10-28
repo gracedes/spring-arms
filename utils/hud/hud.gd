@@ -12,6 +12,6 @@ func _process(delta: float) -> void:
 	var v = player.linear_velocity
 	var cam = player.get_node("Camera")
 	var zoom = cam.zoom
-	var cam_pos_scale = cam.position / (cam.get_viewport_rect().size * zoom)
+	var cam_pos_scale = cam.offset
 	
 	$testinfo.text = "velocity: " + str(v) + "\ncam pos: " + str(cam_pos_scale) + "\ncam zoom: " + str(zoom)
