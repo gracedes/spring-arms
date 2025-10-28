@@ -19,6 +19,15 @@ func _process(delta: float) -> void:
 	zoom_out(v)
 
 func shift_pos(v: Vector2) -> Vector2:
+	var vp = get_viewport_rect().size * zoom
+	
+	var temp = 0.0001 * v
+	for i in range(2):
+		if temp[i] > -1.0:
+			v[i] = min(temp[i], 1.0)
+		else:
+			v[i] = -1.0
+	
 	return Vector2.ZERO
 
 func zoom_out(v: Vector2) -> void:
