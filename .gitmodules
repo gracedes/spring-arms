@@ -1,0 +1,3 @@
+[submodule "spring-arms-docs"]
+	path = spring-arms-docs
+	url = git@github.com:gracedes/spring-arms-docs
